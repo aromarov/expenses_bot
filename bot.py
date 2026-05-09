@@ -1,13 +1,3 @@
-from dotenv import load_dotenv
-load_dotenv()
-
-import os
-import requests
-from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
-
-APPS_SCRIPT_URL = os.environ["APPS_SCRIPT_URL"]
-
 async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
     parts = text.split(maxsplit=2)
@@ -22,17 +12,24 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "person": person
     })
 
-    missing = []
-    if not category: missing.append("категория")
-    if not person:   missing.append("кто")
-    
-    if missing:
-        note = f" (не указано: {', '.join(missing)})"
-    else:
-        note = ""
-    
-    await update.message.reply_text(f"Готово ✅{note}")
+try:
+        big = int(amount) > 1000
+    except:
+        big = False
 
-app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
-app.run_polling()
+    if not category and not person:
+        comment = "ты не добавил зачем и кто, но"
+    elif not category:
+        comment = "ты не добавил нахера, но"
+    elif not person:
+        comment = "ты не добавил кто нахуй, но"
+    else:
+        comment = ""
+
+    if big:
+        ending = "нихуя себе, добавил 🤑"
+    else:
+        ending = "добавил ✅"
+
+    reply = f"{comment} {ending}".strip()
+    await update.message.reply_text(reply)

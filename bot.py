@@ -4,7 +4,7 @@ load_dotenv()
 import os
 import requests
 from telegram import Update
-from telegram.ext import ApplicationBuilder, MessageHandler, filters, ContextTypes
+from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, filters, ContextTypes
 
 APPS_SCRIPT_URL = os.environ["APPS_SCRIPT_URL"]
 
@@ -40,6 +40,15 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply = f"{comment} {ending}".strip()
     await update.message.reply_text(reply)
 
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("я тут, напиши сколько вы потратили 💸")
+
 app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
+app.add_handler(CommandHandler("start", start))
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
+app.run_polling()
+
+app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
+
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle))
 app.run_polling()

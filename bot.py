@@ -13,8 +13,8 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     parts = text.split(maxsplit=2)
 
     amount   = parts[0] if len(parts) > 0 else ""
-    category = parts[1] if len(parts) > 1 else ""
-    person   = parts[2] if len(parts) > 2 else ""
+    person   = parts[1] if len(parts) > 1 else ""
+    category = parts[2] if len(parts) > 2 else ""
 
     requests.post(APPS_SCRIPT_URL, json={
         "amount": amount,

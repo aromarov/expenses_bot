@@ -26,8 +26,8 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     requests.post(APPS_SCRIPT_URL, json={
         "amount": amount,
+        "person": person,
         "category": category,
-        "person": person
     })
 
     big = amount_int > 1000

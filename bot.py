@@ -18,11 +18,11 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         amount_int = int(amount)
     except:
-        await update.message.reply_text("это нихуя не число эй. не буду записывать")
+        await update.message.reply_text("это нихуя не число в начале, эй. не буду записывать")
         return
 
     if amount_int == 0:
-        await update.message.reply_text("ты серьёзно? записал ноль")
+        await update.message.reply_text("серьёзно? записал ноль")
         return
 
     requests.post(APPS_SCRIPT_URL, json={
@@ -34,11 +34,11 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     big = amount_int > 1000
 
     if not category and not person:
-        comment = "ты не добавил нахера и кто, блядь, но"
+        comment = "ты не написал нахера и кто, блядь, но"
     elif not category:
-        comment = "ты не добавил нахера, но"
+        comment = "ты не написал нахера, но"
     elif not person:
-        comment = "ты не добавил кто, блядь, но"
+        comment = "ты не написал кто, блядь, но"
     else:
         comment = ""
 

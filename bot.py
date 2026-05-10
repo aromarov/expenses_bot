@@ -51,15 +51,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def last(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r = requests.get(APPS_SCRIPT_URL, params={"action": "last"})
-    await update.message.reply_text(f"последние записи:\n{r.text}")
+    await update.message.reply_text(f"последние проебы:\n{r.text}")
 
 async def today(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r = requests.get(APPS_SCRIPT_URL, params={"action": "today"})
-    await update.message.reply_text(f"сегодня потрачено: {r.text}")
+    await update.message.reply_text(f"сегодня проебано: {r.text}")
 
 async def total(update: Update, context: ContextTypes.DEFAULT_TYPE):
     r = requests.get(APPS_SCRIPT_URL, params={"action": "total"})
-    await update.message.reply_text(f"всего потрачено: {r.text}")
+    await update.message.reply_text(f"всего проебано: {r.text}")
 
 app = ApplicationBuilder().token(os.environ["BOT_TOKEN"]).build()
 app.add_handler(CommandHandler("start", start))

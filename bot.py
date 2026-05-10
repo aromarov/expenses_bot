@@ -23,6 +23,7 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if amount_int == 0:
         await update.message.reply_text("ты серьёзно? записал ноль")
+        return
 
     requests.post(APPS_SCRIPT_URL, json={
         "amount": amount,

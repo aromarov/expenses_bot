@@ -8,9 +8,9 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, fil
 APPS_SCRIPT_URL = os.environ["APPS_SCRIPT_URL"]
 
 WHO = {
-    "мур": "Мур",
-    "Расул": "Сюм",
-    "расул": "Сюм"
+    "мур": "Мурад",
+    "сюм": "Расул",
+    "сеня": "Арсен"
     # добавляй сколько угодно
 }
 
@@ -41,7 +41,7 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     if amount_int == 0:
-        await update.message.reply_text("серьёзно? записал ноль")
+        await update.message.reply_text("серьёзно? не запишу")
         return
 
     requests.post(APPS_SCRIPT_URL, json={

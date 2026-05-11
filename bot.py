@@ -7,6 +7,22 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, fil
 
 APPS_SCRIPT_URL = os.environ["APPS_SCRIPT_URL"]
 
+WHO = {
+    "мур": "Мур",
+    "Расул": "Сюм",
+    "расул": "Сюм"
+    # добавляй сколько угодно
+}
+
+WHAT = {
+    "магаз": "Продукты",
+    "рестик": "Ресторан",
+    "магазин": "Продукты",
+    "алко": "Алкоголь",
+    "пиво": "Алкоголь"
+    # добавляй сколько угодно
+}
+
 async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
     parts = text.split(maxsplit=2)
@@ -14,6 +30,9 @@ async def handle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     amount   = parts[0] if len(parts) > 0 else ""
     person   = parts[1] if len(parts) > 1 else ""
     category = parts[2] if len(parts) > 2 else ""
+
+    person   = WHO.get(person.lower(), person.capitalize())
+    category = WHAT.get(category.lower(), category.capitalize())
 
     try:
         amount_int = int(amount)
